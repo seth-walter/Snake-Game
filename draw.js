@@ -1,7 +1,7 @@
 //Setting up grey canvas for the game
 const canvas = document.querySelector(".canvas");
 const ctx = canvas.getContext("2d");
-const scale = 10;
+const scale = 20;
 const rows = canvas.height / scale;
 const columns = canvas.width / scale;
 
@@ -19,10 +19,14 @@ var snake;
         snake.update();
         snake.draw();
 
+        if (snake.collide()) {
+            location.reload();
+            alert("GAME OVER\n Score: " + snake.total * 10);
+        }
         if (snake.eat(fruit)) {
             fruit.pickLocation();
         }
-    }, 250)
+    }, 100)
 }());
 
 //Change direction using keys W, A, S, and D

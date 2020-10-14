@@ -43,27 +43,38 @@ function Snake() {
         if (this.y < 0) {
             this.y = canvas.height;
         }
-
     }
 
     //Determines direction snake is moving based on key press
     this.changeDirection = function(direction) {
         switch(direction) {
             case 'w':
-                this.xSpeed = 0;
-                this.ySpeed = -scale * 1;
+                if (this.ySpeed == scale && this.tail.length != 0) {}
+                else {
+                    this.xSpeed = 0;
+                    this.ySpeed = -scale * 1;
+                }
                 break;
             case 'a':
-                this.xSpeed = -scale * 1;
-                this.ySpeed = 0;
+                if (this.xSpeed == scale && this.tail.length != 0) {}
+                else {
+                    this.xSpeed = -scale * 1;
+                    this.ySpeed = 0;
+                }
                 break;
             case 's':
-                this.xSpeed = 0;
-                this.ySpeed = scale * 1;
+                if (this.ySpeed == -scale && this.tail.length != 0) {}
+                else {
+                    this.xSpeed = 0;
+                    this.ySpeed = scale * 1;
+                }
                 break;
             case 'd':
-                this.xSpeed = scale * 1;
-                this.ySpeed = 0;
+                if (this.xSpeed == -scale && this.tail.length != 0) {}
+                else {
+                    this.xSpeed = scale * 1;
+                    this.ySpeed = 0;
+                }
                 break;
         }
     }
@@ -75,6 +86,16 @@ function Snake() {
             return true;
         }
 
+        return false;
+    }
+
+    //Determines if the snake has ran into itself
+    this.collide = function() {
+        for (let i = 0; i < this.tail.length - 1; i++) {
+            if (this.x == this.tail[i].x && this.y == this.tail[i].y) {
+                return true;
+            }
+        }
         return false;
     }
 }
